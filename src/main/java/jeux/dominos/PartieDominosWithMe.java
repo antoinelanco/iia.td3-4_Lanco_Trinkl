@@ -1,5 +1,10 @@
 package jeux.dominos;
-
+/**
+ * EST CE QUE CA MARCHE??????
+ * 
+ * 
+ * 
+ */
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
