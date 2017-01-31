@@ -11,7 +11,7 @@ public class PlateauDominos implements PlateauJeu {
 	/* *********** constantes *********** */
 
 	/** Taille de la grille */
-	public final static int TAILLE = 5;
+	public final static int TAILLE = 7;
 
 	/* *********** Paramètres de classe *********** */
 
@@ -106,7 +106,7 @@ public class PlateauDominos implements PlateauJeu {
 		CoupDominos cd = (CoupDominos) c;
 		int ligne = cd.getLigne();
 		int colonne = cd.getColonne();
-		if (joueur.equals(joueurBlanc)) { 
+		if (joueur.sameId(this.joueurBlanc)) { 
 			damier[ligne][colonne] = BLANC;
 			damier[ligne][colonne+1] = BLANC;
 		} else {

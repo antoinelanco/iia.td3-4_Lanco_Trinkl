@@ -40,10 +40,9 @@ public class AlphaBeta implements AlgoJeu {
 		for (CoupJeu c : p.coupsPossibles(this.joueurMax)){
 			this.nbnoeuds ++;
 			PlateauJeu tmp = p.copy();
-			tmp.joue(this.joueurMax, c);
-			//beta = Math.min(beta, maxMin(tmp, profMax - 1,alpha,beta));
+			Joueur Jtmp = this.joueurMax.copy();
+			tmp.joue(Jtmp, c);
 			int Max = minMax(tmp, profMax - 1,alpha,beta);
-			//System.out.println("MH :"+Max);
 			if (alpha < Max){
 				alpha = Max;
 				MH = alpha;
@@ -54,11 +53,6 @@ public class AlphaBeta implements AlgoJeu {
         
         System.out.println("N°Noeuds :"+this.nbnoeuds);
         System.out.println("N°Feuilles :"+this.nbfeuilles);
-        System.out.println("mc :"+MH);
-        if(MH == 0){
-        	System.out.println("Jai GG");
-        	//System.exit(0);
-        }
         
         return meilleurCoup;
      }
@@ -77,7 +71,8 @@ public class AlphaBeta implements AlgoJeu {
     		for (CoupJeu c : p.coupsPossibles(this.joueurMax)){
     			this.nbnoeuds ++;
     			PlateauJeu tmp = p.copy();
-    			tmp.joue(this.joueurMax, c);
+    			Joueur Jtmp = this.joueurMax.copy();
+    			tmp.joue(Jtmp, c);
     			alpha = Math.max(alpha, minMax(tmp, prof - 1,alpha,beta));
     			if (alpha >= beta){
     				return beta;
@@ -98,7 +93,8 @@ public class AlphaBeta implements AlgoJeu {
     		for (CoupJeu c : p.coupsPossibles(this.joueurMin)){
     			this.nbnoeuds ++;
     			PlateauJeu tmp = p.copy();
-    			tmp.joue(this.joueurMin, c);
+    			Joueur Jtmp = this.joueurMin.copy();
+    			tmp.joue(Jtmp, c);
     			beta = Math.min(beta, maxMin(tmp, prof - 1,alpha,beta));
     			if (alpha >= beta){
     				return alpha;

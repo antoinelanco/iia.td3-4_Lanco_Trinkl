@@ -9,10 +9,14 @@ public class Joueur  //A
 
     public Joueur(String s)
     {
-        id = s;
+        this.id = s;
         this.graines = 0;
     }
-    public int getGraines(){
+    public Joueur(String s, int graines) {
+        this.id = s;
+        this.graines = graines;
+	}
+	public int getGraines(){
     	return this.graines;
     }
     public void addGraines(int nb){
@@ -32,6 +36,14 @@ public class Joueur  //A
     public String toString()
     {
         return id;
+    }
+    
+    public Joueur copy(){
+    	return new Joueur(this.id,this.graines);
+    }
+    
+    public boolean sameId(Joueur j){
+    	return this.id == j.getId();
     }
 
 }

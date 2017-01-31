@@ -11,16 +11,16 @@ public class HeuristiquesAwale{
 	public static  Heuristique hblanc = new Heuristique(){
 				
 		public int eval(PlateauJeu p, Joueur j){
-			PlateauDominos pd = (PlateauDominos) p;
-			return -pd.nbCoupsNoir();
+			PlateauAwale pd = (PlateauAwale) p;
+			return j.getGraines();
 		}
 	};
 
 	public static  Heuristique hnoir = new Heuristique(){
 	
 		public int eval(PlateauJeu p, Joueur j){
-			PlateauDominos pd = (PlateauDominos) p;
-			return -pd.nbCoupsBlanc();
+			PlateauAwale pd = (PlateauAwale) p;
+			return j.getGraines();
 		}
 	};
 
