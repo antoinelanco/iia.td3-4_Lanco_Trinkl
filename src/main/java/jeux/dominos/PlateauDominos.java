@@ -11,7 +11,7 @@ public class PlateauDominos implements PlateauJeu {
 	/* *********** constantes *********** */
 
 	/** Taille de la grille */
-	public final static int TAILLE = 7;
+	public final static int TAILLE = 5;
 
 	/* *********** Paramètres de classe *********** */
 
@@ -118,10 +118,17 @@ public class PlateauDominos implements PlateauJeu {
 	/* ********************* Autres méthodes ***************** */	
 
 	private boolean coupValide(Joueur joueur,int l, int c) {
-		if (joueur.equals(joueurBlanc))  
-			return (damier[l][c] == VIDE && damier[l][c+1] == VIDE);
-		else
-			return (damier[l][c] == VIDE && damier[l+1][c] == VIDE);		
+		try{
+			if (joueur.equals(joueurBlanc)){
+				return (damier[l][c] == VIDE && damier[l][c+1] == VIDE);
+			}
+			else{
+				return (damier[l][c] == VIDE && damier[l+1][c] == VIDE);	
+			}
+		}catch(ArrayIndexOutOfBoundsException E){
+			return false;
+		}
+	
 	}
 
 

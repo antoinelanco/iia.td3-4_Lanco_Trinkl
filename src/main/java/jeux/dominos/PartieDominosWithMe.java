@@ -1,10 +1,5 @@
 package jeux.dominos;
-/**
- * EST CE QUE CA MARCHE??????
- * 
- * 
- * 
- */
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -33,8 +28,8 @@ public class PartieDominosWithMe {
         //AlgoJoueur[0] = new Minimax(HeuristiquesDominos.hblanc, jBlanc, jNoir,4); // Il faut remplir la méthode !!!
         //AlgoJoueur[1] = new Minimax(HeuristiquesDominos.hnoir, jNoir, jBlanc,4);  // Il faut remplir la méthode !!!
 
-        AlgoJoueur[0] = new AlphaBeta(HeuristiquesDominos.hblanc, jBlanc, jNoir,7);
-        AlgoJoueur[1] = new AlphaBeta(HeuristiquesDominos.hnoir, jNoir, jBlanc,7);
+        AlgoJoueur[0] = new AlphaBeta(HeuristiquesDominos.hblanc, jBlanc, jNoir,100);
+        AlgoJoueur[1] = new AlphaBeta(HeuristiquesDominos.hnoir, jNoir, jBlanc,100);
 
         System.out.println("TD IIA n.3 - Algorithmes pour les Jeux");
         System.out.println("Etat Initial du plateau de jeu:");
@@ -51,7 +46,7 @@ public class PartieDominosWithMe {
         // A chaque itération de la boucle, on fait jouer un des deux joueurs
         // tour a tour
         jnum = 0; // On commence par le joueur Blanc (arbitraire)
-
+		Scanner input = new Scanner( System.in );
         while (!jeufini) {
             System.out.println("" + plateauCourant);
             System.out.println("C'est au joueur " + lesJoueurs[jnum] + " de jouer.");
@@ -69,7 +64,7 @@ public class PartieDominosWithMe {
 
             	}else{
 	   	             
-            		 Scanner input = new Scanner( System.in );
+
 		             System.out.print("X:");
 		             int x = input.nextInt();
 		             System.out.print("Y:");
@@ -96,5 +91,6 @@ public class PartieDominosWithMe {
 
             }
         }
+        input.close();
     }
 }
