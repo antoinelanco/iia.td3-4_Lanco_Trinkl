@@ -3,7 +3,6 @@ package jeux.awale;
 import iia.jeux.alg.Heuristique;
 import iia.jeux.modele.PlateauJeu;
 import iia.jeux.modele.joueur.Joueur;
-import jeux.dominos.PlateauDominos;
 
 
 public class HeuristiquesAwale{
@@ -12,7 +11,7 @@ public class HeuristiquesAwale{
 				
 		public int eval(PlateauJeu p, Joueur j){
 			PlateauAwale pd = (PlateauAwale) p;
-			return j.getGraines();
+			return -pd.getGrainesPlateauNoir();
 		}
 	};
 
@@ -20,7 +19,7 @@ public class HeuristiquesAwale{
 	
 		public int eval(PlateauJeu p, Joueur j){
 			PlateauAwale pd = (PlateauAwale) p;
-			return j.getGraines();
+			return -pd.getGrainesPlateauBlanc();
 		}
 	};
 

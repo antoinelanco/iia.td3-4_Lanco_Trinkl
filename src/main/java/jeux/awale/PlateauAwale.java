@@ -68,12 +68,13 @@ public class PlateauAwale implements PlateauJeu{
 					lesCoupsPossibles.add(new CoupAwale(i));
 				}
 			}	
+			@SuppressWarnings("unchecked")
 			ArrayList<CoupJeu> tmpArray = (ArrayList<CoupJeu>) lesCoupsPossibles.clone();
 			for(CoupJeu c : tmpArray){
 				PlateauAwale tmp = (PlateauAwale) this.copy();
 				Joueur Jtmp = j.copy();
 				tmp.joue(Jtmp, c);
-				if(PlateauNoirVide()){
+				if(getGrainesPlateauNoir()==0){
 					lesCoupsPossibles.remove(c);
 				}
 				
@@ -84,12 +85,13 @@ public class PlateauAwale implements PlateauJeu{
 					lesCoupsPossibles.add(new CoupAwale(i));
 				}
 			}
+			@SuppressWarnings("unchecked")
 			ArrayList<CoupJeu> tmpArray = (ArrayList<CoupJeu>) lesCoupsPossibles.clone();
 			for(CoupJeu c : tmpArray){
 				PlateauAwale tmp = (PlateauAwale) this.copy();
 				Joueur Jtmp = j.copy();
 				tmp.joue(Jtmp, c);
-				if(PlateauBlancVide()){
+				if(getGrainesPlateauBlanc()==0){
 					lesCoupsPossibles.remove(c);
 				}
 				
@@ -195,12 +197,13 @@ public class PlateauAwale implements PlateauJeu{
 
 		retstr += "-------------------------------\n";
 		retstr += "| ";
+
 		for(int i=5; i>=0; i--){
-			retstr += String.format("%02d", this.campNoir[i])+" | ";
+			retstr += String.format("%02d", this.campBlanc[i])+" | ";
 		}
 		retstr += "\n| ";
 		for(int i=0; i<6; i++){
-			retstr += String.format("%02d", this.campBlanc[i])+" | ";
+			retstr += String.format("%02d", this.campNoir[i])+" | ";
 		}
 		retstr += "\n-------------------------------";
 
@@ -211,32 +214,33 @@ public class PlateauAwale implements PlateauJeu{
 		out.println(this.toString());
 	}
 	
+	@SuppressWarnings("unused")
 	public void toGraph(){
 		JFrame frame = new PlateauGraph("Awale");
 	}
 
 	@Override
 	public boolean finDePartie() {
-		if(this.joueurBlanc.getGraines() > 25 || this.joueurNoir.getGraines() > 25 || PlateauBlancVide() || PlateauNoirVide() ){
+		if(PlateauAwale.joueurBlanc.getGraines() > 25 || PlateauAwale.joueurNoir.getGraines() > 25 || getGrainesPlateauBlanc()==0 || getGrainesPlateauNoir()==0 ){
 			return true;
 		}
 		return false;
 	}
 
-	private boolean PlateauBlancVide(){
+	public int getGrainesPlateauBlanc(){
 		int res = 0;
 		for(int c: this.campBlanc){
 			res += c;
 		}
-		return res==0;
+		return res;
 	}
 
-	private boolean PlateauNoirVide(){
+	public int getGrainesPlateauNoir(){
 		int res = 0;
 		for(int c: this.campNoir){
 			res += c;
 		}
-		return res==0;
+		return res;
 	}
 
 	@Override
@@ -246,8 +250,11 @@ public class PlateauAwale implements PlateauJeu{
 
 	@Override
 	public boolean coupValide(Joueur j, CoupJeu c) {
-		// TODO Auto-generated method stub
-		return false;
+		if(isJoueurBlanc(j)){
+			return this.campBlanc[((CoupAwale) c).getTrou()] != 0;
+		}else{
+			return this.campNoir[((CoupAwale) c).getTrou()] != 0;
+		}
 	}
 
 }
