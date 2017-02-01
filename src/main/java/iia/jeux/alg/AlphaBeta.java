@@ -73,7 +73,7 @@ public class AlphaBeta implements AlgoJeu {
     		for (CoupJeu c : p.coupsPossibles(this.joueurMax)){
     			this.nbnoeuds ++;
     			PlateauJeu tmp = p.copy();
-    			Joueur Jtmp = j.copy();
+    			Joueur Jtmp = this.joueurMax.copy();
     			tmp.joue(Jtmp, c);
     			alpha = Math.max(alpha, minMax(tmp, prof - 1,alpha,beta, Jtmp));
     			if (alpha >= beta){

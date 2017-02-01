@@ -11,7 +11,8 @@ public class HeuristiquesAwale{
 				
 		public int eval(PlateauJeu p, Joueur j){
 			PlateauAwale pd = (PlateauAwale) p;
-			return -pd.getGrainesPlateauNoir();
+			//return -pd.getGrainesPlateauNoir();
+			return j.getGraines();
 		}
 	};
 
@@ -19,7 +20,8 @@ public class HeuristiquesAwale{
 	
 		public int eval(PlateauJeu p, Joueur j){
 			PlateauAwale pd = (PlateauAwale) p;
-			return -pd.getGrainesPlateauBlanc();
+			//return -pd.getGrainesPlateauBlanc();
+			return j.getGraines();
 		}
 	};
 
