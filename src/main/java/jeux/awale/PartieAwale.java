@@ -47,6 +47,7 @@ public class PartieAwale {
 
         while (!jeufini) {
             System.out.println("" + plateauCourant);
+        	//((PlateauAwale) plateauCourant).toGraph();
             System.out.println("C'est au joueur " + lesJoueurs[jnum] + " de jouer.");
             // Vérifie qu'il y a bien des coups possibles
             // Ce n'est pas tres efficace, mais c'est plus rapide... a écrire...

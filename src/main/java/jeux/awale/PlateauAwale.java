@@ -3,7 +3,10 @@ package jeux.awale;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
 import iia.jeux.modele.CoupJeu;
+import iia.jeux.modele.PlateauGraph;
 import iia.jeux.modele.PlateauJeu;
 import iia.jeux.modele.joueur.Joueur;
 
@@ -65,7 +68,8 @@ public class PlateauAwale implements PlateauJeu{
 					lesCoupsPossibles.add(new CoupAwale(i));
 				}
 			}	
-			for(CoupJeu c : lesCoupsPossibles){
+			ArrayList<CoupJeu> tmpArray = (ArrayList<CoupJeu>) lesCoupsPossibles.clone();
+			for(CoupJeu c : tmpArray){
 				PlateauAwale tmp = (PlateauAwale) this.copy();
 				Joueur Jtmp = j.copy();
 				tmp.joue(Jtmp, c);
@@ -80,7 +84,8 @@ public class PlateauAwale implements PlateauJeu{
 					lesCoupsPossibles.add(new CoupAwale(i));
 				}
 			}
-			for(CoupJeu c : lesCoupsPossibles){
+			ArrayList<CoupJeu> tmpArray = (ArrayList<CoupJeu>) lesCoupsPossibles.clone();
+			for(CoupJeu c : tmpArray){
 				PlateauAwale tmp = (PlateauAwale) this.copy();
 				Joueur Jtmp = j.copy();
 				tmp.joue(Jtmp, c);
@@ -204,6 +209,10 @@ public class PlateauAwale implements PlateauJeu{
 
 	public void printPlateau(PrintStream out) {
 		out.println(this.toString());
+	}
+	
+	public void toGraph(){
+		JFrame frame = new PlateauGraph("Awale");
 	}
 
 	@Override
