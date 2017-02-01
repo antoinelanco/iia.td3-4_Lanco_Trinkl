@@ -40,9 +40,8 @@ public class AlphaBeta implements AlgoJeu {
 		for (CoupJeu c : p.coupsPossibles(this.joueurMax)){
 			this.nbnoeuds ++;
 			PlateauJeu tmp = p.copy();
-			Joueur Jtmp = this.joueurMax.copy();
-			tmp.joue(Jtmp, c);
-			int Max = minMax(tmp, profMax - 1,alpha,beta,Jtmp);
+			tmp.joue(this.joueurMax, c);
+			int Max = minMax(tmp, profMax - 1,alpha,beta);
 			System.out.println("mh : "+Max);
 			if (alpha < Max){
 				alpha = Max;
@@ -63,19 +62,18 @@ public class AlphaBeta implements AlgoJeu {
         return "AlphaBeta(ProfMax="+profMax+")";
     }
 
-    private int maxMin(PlateauJeu p, int prof, int alpha, int beta,Joueur j){
+    private int maxMin(PlateauJeu p, int prof, int alpha, int beta){
     	if (p.finDePartie() || prof == 0){
     		this.nbfeuilles ++;
     		//System.out.println("eval h "+h.eval(p, this.joueurMax));
-    		return h.eval(p, j);
+    		return h.eval(p, this.joueurMax);
     	}
     	else {
     		for (CoupJeu c : p.coupsPossibles(this.joueurMax)){
     			this.nbnoeuds ++;
     			PlateauJeu tmp = p.copy();
-    			Joueur Jtmp = this.joueurMax.copy();
-    			tmp.joue(Jtmp, c);
-    			alpha = Math.max(alpha, minMax(tmp, prof - 1,alpha,beta, Jtmp));
+    			tmp.joue(this.joueurMax, c);
+    			alpha = Math.max(alpha, minMax(tmp, prof - 1,alpha,beta));
     			if (alpha >= beta){
     				return beta;
     			}
@@ -85,19 +83,18 @@ public class AlphaBeta implements AlgoJeu {
     	}
     }
 
-    private int minMax(PlateauJeu p,int prof, int alpha, int beta, Joueur j){
+    private int minMax(PlateauJeu p,int prof, int alpha, int beta){
     	if (p.finDePartie() || prof == 0){
     		this.nbfeuilles ++;
     		//System.out.println("eval h "+h.eval(p, this.joueurMin));
-    		return h.eval(p, j);
+    		return h.eval(p,this.joueurMin);
     	}
     	else {
     		for (CoupJeu c : p.coupsPossibles(this.joueurMin)){
     			this.nbnoeuds ++;
     			PlateauJeu tmp = p.copy();
-    			Joueur Jtmp = this.joueurMin.copy();
-    			tmp.joue(Jtmp, c);
-    			beta = Math.min(beta, maxMin(tmp, prof - 1,alpha,beta, Jtmp));
+    			tmp.joue(this.joueurMin, c);
+    			beta = Math.min(beta, maxMin(tmp, prof - 1,alpha,beta));
     			if (alpha >= beta){
     				return alpha;
     			}

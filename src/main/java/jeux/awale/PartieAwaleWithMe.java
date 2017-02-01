@@ -52,8 +52,8 @@ public class PartieAwaleWithMe {
         jnum = 0; // On commence par le joueur Blanc (arbitraire)
 		Scanner input = new Scanner( System.in );
         while (!jeufini) {
-        	System.out.println("NB Graines Blanc : "+jBlanc.getGraines());
-        	System.out.println("NB Graines Noir : "+jNoir.getGraines());
+        	System.out.println("NB Graines Blanc : "+((PlateauAwale) plateauCourant).getGrainesBlanc());
+        	System.out.println("NB Graines Noir : "+((PlateauAwale) plateauCourant).getGrainesNoir());
             System.out.println("" + plateauCourant);
             System.out.println("C'est au joueur " + lesJoueurs[jnum] + " de jouer.");
             // Vérifie qu'il y a bien des coups possibles

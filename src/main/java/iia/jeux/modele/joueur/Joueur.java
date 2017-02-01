@@ -5,23 +5,15 @@ public class Joueur  //A
 {
 
     private String id;
-    private int graines;
 
     public Joueur(String s)
     {
         this.id = s;
-        this.graines = 0;
     }
     public Joueur(String s, int graines) {
         this.id = s;
-        this.graines = graines;
 	}
-	public int getGraines(){
-    	return this.graines;
-    }
-    public void addGraines(int nb){
-    	this.graines = this.graines+nb;
-    }
+
 
     public String getId()    // A
     {
@@ -36,10 +28,6 @@ public class Joueur  //A
     public String toString()
     {
         return id;
-    }
-    
-    public Joueur copy(){
-    	return new Joueur(this.id,this.graines);
     }
     
     public boolean sameId(Joueur j){
