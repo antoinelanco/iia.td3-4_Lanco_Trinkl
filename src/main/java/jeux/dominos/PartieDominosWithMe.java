@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import iia.jeux.alg.AlgoJeu;
 import iia.jeux.alg.AlphaBeta;
+import iia.jeux.alg.NegMinMax;
 import iia.jeux.modele.CoupJeu;
 import iia.jeux.modele.PlateauJeu;
 import iia.jeux.modele.joueur.Joueur;
@@ -29,7 +30,10 @@ public class PartieDominosWithMe {
         //AlgoJoueur[1] = new Minimax(HeuristiquesDominos.hnoir, jNoir, jBlanc,4);  // Il faut remplir la méthode !!!
 
         AlgoJoueur[0] = new AlphaBeta(HeuristiquesDominos.hblanc, jBlanc, jNoir,6);
-        AlgoJoueur[1] = new AlphaBeta(HeuristiquesDominos.hnoir, jNoir, jBlanc,6);
+       // AlgoJoueur[1] = new AlphaBeta(HeuristiquesDominos.hnoir, jNoir, jBlanc,6);
+
+        //AlgoJoueur[0] = new NegMinMax(HeuristiquesDominos.hblanc, jBlanc, jNoir,6);
+        AlgoJoueur[1] = new NegMinMax(HeuristiquesDominos.hnoir, jNoir, jBlanc,6);
 
         System.out.println("TD IIA n.3 - Algorithmes pour les Jeux");
         System.out.println("Etat Initial du plateau de jeu:");

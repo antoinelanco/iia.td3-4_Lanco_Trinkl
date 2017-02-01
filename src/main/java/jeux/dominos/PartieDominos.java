@@ -3,6 +3,7 @@ package jeux.dominos;
 import iia.jeux.alg.AlgoJeu;
 import iia.jeux.alg.AlphaBeta;
 import iia.jeux.alg.Minimax;
+import iia.jeux.alg.NegMinMax;
 import iia.jeux.modele.CoupJeu;
 import iia.jeux.modele.PlateauJeu;
 import iia.jeux.modele.joueur.Joueur;
@@ -23,11 +24,14 @@ public class PartieDominos {
 
 
         AlgoJeu AlgoJoueur[] = new AlgoJeu[2];
-        AlgoJoueur[0] = new Minimax(HeuristiquesDominos.hblanc, jBlanc, jNoir,1); // Il faut remplir la méthode !!!
-        AlgoJoueur[1] = new Minimax(HeuristiquesDominos.hnoir, jNoir, jBlanc,1);  // Il faut remplir la méthode !!!
+        //AlgoJoueur[0] = new Minimax(HeuristiquesDominos.hblanc, jBlanc, jNoir,4); // Il faut remplir la méthode !!!
+        //AlgoJoueur[1] = new Minimax(HeuristiquesDominos.hnoir, jNoir, jBlanc,4);  // Il faut remplir la méthode !!!
 
-        //AlgoJoueur[0] = new AlphaBeta(HeuristiquesDominos.hblanc, jBlanc, jNoir,5);
-        //AlgoJoueur[1] = new AlphaBeta(HeuristiquesDominos.hnoir, jNoir, jBlanc,5);	
+        AlgoJoueur[0] = new AlphaBeta(HeuristiquesDominos.hblanc, jBlanc, jNoir,1);
+       // AlgoJoueur[1] = new AlphaBeta(HeuristiquesDominos.hnoir, jNoir, jBlanc,6);
+
+        //AlgoJoueur[0] = new NegMinMax(HeuristiquesDominos.hblanc, jBlanc, jNoir,6);
+        AlgoJoueur[1] = new NegMinMax(HeuristiquesDominos.hnoir, jNoir, jBlanc,1);	
 
         System.out.println("TD IIA n.3 - Algorithmes pour les Jeux");
         System.out.println("Etat Initial du plateau de jeu:");
