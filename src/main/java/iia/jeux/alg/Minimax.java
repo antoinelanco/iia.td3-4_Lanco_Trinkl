@@ -69,11 +69,10 @@ public class Minimax implements AlgoJeu {
         int max = Integer.MIN_VALUE;
         CoupJeu meilleurCoup = p.coupsPossibles(joueurMax).get(0);
         
-        for(CoupJeu c : p.coupsPossibles(joueurMax)) {
+        for(CoupJeu c : p.coupsPossibles(this.joueurMax)) {
         	this.nbnoeuds ++;
-        	Joueur Jtmp = this.joueurMax.copy();
             PlateauJeu tmp = p.copy();
-            tmp.joue(Jtmp, c);           
+            tmp.joue(this.joueurMax, c);           
             
             if(max < minMax(tmp,profMax-1)){
                 max = minMax(tmp,profMax-1);
@@ -112,8 +111,7 @@ public class Minimax implements AlgoJeu {
     		for (CoupJeu c : p.coupsPossibles(this.joueurMax)){
     			this.nbnoeuds ++;
     			PlateauJeu tmp = p.copy();
-    			Joueur Jtmp = this.joueurMax.copy();
-    			tmp.joue(Jtmp, c);
+    			tmp.joue(this.joueurMax, c);
     			max = Math.max(max, minMax(tmp, prof - 1));
     		}
     	//System.out.println(max);
@@ -134,8 +132,7 @@ public class Minimax implements AlgoJeu {
     		for (CoupJeu c : p.coupsPossibles(this.joueurMin)){
     			this.nbnoeuds ++;
     			PlateauJeu tmp = p.copy();
-    			Joueur Jtmp = this.joueurMin.copy();
-    			tmp.joue(Jtmp, c);
+    			tmp.joue(this.joueurMin, c);
     			min = Math.min(min, maxMin(tmp, prof - 1));
     		}
     	//System.out.println(min);

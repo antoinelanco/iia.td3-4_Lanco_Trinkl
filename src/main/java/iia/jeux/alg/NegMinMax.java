@@ -29,12 +29,11 @@ public class NegMinMax implements AlgoJeu {
         int alpha = Integer.MIN_VALUE;
 
 
-        CoupJeu meilleurCoup = p.coupsPossibles(joueurMax).get(0);
+        CoupJeu meilleurCoup = p.coupsPossibles(this.joueurMax).get(0);
 
-        for(CoupJeu c : p.coupsPossibles(joueurMax)) {
+        for(CoupJeu c : p.coupsPossibles(this.joueurMax)) {
             PlateauJeu tmp = p.copy();
-            Joueur Jtmp = joueurMax.copy();
-            tmp.joue(Jtmp, c);
+            tmp.joue(this.joueurMax, c);
             this.nbnoeuds++;
             int minMaxValue = negMax(tmp, profMax - 1);
 
@@ -85,8 +84,7 @@ public class NegMinMax implements AlgoJeu {
             for (CoupJeu c : p.coupsPossibles(this.joueurMax)){
             	this.nbnoeuds++;
                 PlateauJeu tmp = p.copy();
-                Joueur Jtmp = joueurMax.copy();
-                tmp.joue(Jtmp, c);
+                tmp.joue(this.joueurMax, c);
                 max = Math.max(max, -negMax(tmp, prof - 1));
             }
             //System.out.println(min)
