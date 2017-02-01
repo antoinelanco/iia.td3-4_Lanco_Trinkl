@@ -14,11 +14,11 @@ public class AlphaBeta implements AlgoJeu {
     private int nbnoeuds;
     private int nbfeuilles;
 
-    
+
     public AlphaBeta(Heuristique h, Joueur joueurMax, Joueur joueurMin) {
         this(h,joueurMax,joueurMin,PROFMAXDEFAUT);
     }
-    
+
 	public AlphaBeta(Heuristique h, Joueur joueurMax, Joueur joueurMin, int profMaxi) {
         this.h = h;
         this.joueurMin = joueurMin;
@@ -27,16 +27,16 @@ public class AlphaBeta implements AlgoJeu {
 	}
 
     public CoupJeu meilleurCoup(PlateauJeu p) {
-    	
+
     	this.nbfeuilles = 0;
     	this.nbnoeuds = 0;
-        
+
         CoupJeu meilleurCoup = p.coupsPossibles(joueurMax).get(0);
-    
+
     	int alpha = Integer.MIN_VALUE;
     	int beta = Integer.MAX_VALUE;
     	int MH = Integer.MIN_VALUE;
-    	
+
 		for (CoupJeu c : p.coupsPossibles(this.joueurMax)){
 			this.nbnoeuds ++;
 			PlateauJeu tmp = p.copy();
@@ -50,10 +50,10 @@ public class AlphaBeta implements AlgoJeu {
 			}
 		}
 
-        
+
         System.out.println("N°Noeuds :"+this.nbnoeuds);
         System.out.println("N°Feuilles :"+this.nbfeuilles);
-        
+        System.out.println("mc :"+MH);
         return meilleurCoup;
      }
 
@@ -104,7 +104,7 @@ public class AlphaBeta implements AlgoJeu {
     	return beta;
     	}
     }
-    
-	    
+
+
 
 }

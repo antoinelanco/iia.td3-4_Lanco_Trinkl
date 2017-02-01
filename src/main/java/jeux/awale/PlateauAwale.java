@@ -8,16 +8,16 @@ import iia.jeux.modele.PlateauJeu;
 import iia.jeux.modele.joueur.Joueur;
 
 public class PlateauAwale implements PlateauJeu{
-	
+
 	public final static int TAILLE = 6;
 	public final static int NBGRAINESINIT = 4;
-	
+
 	private static Joueur joueurBlanc;
 	private static Joueur joueurNoir;
 	private int campBlanc[];
 	private int campNoir[];
-	
-	
+
+
 	public PlateauAwale(){
 		this.campBlanc = new int[TAILLE];
 		this.campNoir = new int[TAILLE];
@@ -27,9 +27,9 @@ public class PlateauAwale implements PlateauJeu{
 		for(int i=0; i < TAILLE; i++){
 			this.campNoir[i] = NBGRAINESINIT;
 		}
-		
+
 	}
-	
+
 	public PlateauAwale(int[] campBlanc, int[] campNoir){
 		this.campBlanc = new int[TAILLE];
 		this.campNoir = new int[TAILLE];
@@ -39,9 +39,9 @@ public class PlateauAwale implements PlateauJeu{
 		for(int i=0; i < TAILLE; i++){
 			this.campNoir[i] = campNoir[i];
 		}
-		
+
 	}
-	
+
 	public static void setJoueurs(Joueur jb, Joueur jn) {
 		joueurBlanc = jb;
 		joueurNoir = jn;
@@ -60,16 +60,34 @@ public class PlateauAwale implements PlateauJeu{
 	public ArrayList<CoupJeu> coupsPossibles(Joueur j) {
 		ArrayList<CoupJeu> lesCoupsPossibles = new ArrayList<CoupJeu>();
 		if(isJoueurBlanc(j)){
-			for(int i=0 ; i < TAILLE ; i++) { 
+			for(int i=0 ; i < TAILLE ; i++) {
 				if(this.campBlanc[i] != 0){
 					lesCoupsPossibles.add(new CoupAwale(i));
 				}
 			}	
+			for(CoupJeu c : lesCoupsPossibles){
+				PlateauAwale tmp = (PlateauAwale) this.copy();
+				Joueur Jtmp = j.copy();
+				tmp.joue(Jtmp, c);
+				if(PlateauNoirVide()){
+					lesCoupsPossibles.remove(c);
+				}
+				
+			}
 		}else{
 			for(int i=0; i< TAILLE; i++){
 				if(this.campNoir[i] != 0){
 					lesCoupsPossibles.add(new CoupAwale(i));
 				}
+			}
+			for(CoupJeu c : lesCoupsPossibles){
+				PlateauAwale tmp = (PlateauAwale) this.copy();
+				Joueur Jtmp = j.copy();
+				tmp.joue(Jtmp, c);
+				if(PlateauBlancVide()){
+					lesCoupsPossibles.remove(c);
+				}
+				
 			}
 		}
 		return lesCoupsPossibles;
@@ -77,21 +95,21 @@ public class PlateauAwale implements PlateauJeu{
 
 	@Override
 	public void joue(Joueur j, CoupJeu c) {
-		
+
 		CoupAwale ca = (CoupAwale) c;
 		int trou = ca.getTrou();
 		int nbGraines;
 		int pointeur = trou;
 		int[] campCourant;
-		
-		
-		
+
+
+
 		if(this.isJoueurBlanc(j)){
 			nbGraines = this.campBlanc[trou];
 			this.campBlanc[trou] = 0;
 			campCourant = this.campBlanc;
 			while(nbGraines > 0){
-				
+
 				if((pointeur+1)>=6){
 					if(campCourant == this.campBlanc){
 						campCourant = this.campNoir;
@@ -100,19 +118,19 @@ public class PlateauAwale implements PlateauJeu{
 					}
 					pointeur = -1;
 				}
-					
+
 				pointeur++;
 				if(pointeur == trou && campCourant == campBlanc){
 					continue;
 				}
 				nbGraines--;
-				campCourant[pointeur]++;				
+				campCourant[pointeur]++;
 			}
-			
+
 			while((campCourant[pointeur] == 2 || campCourant[pointeur] == 3) && campCourant == this.campNoir){
 				j.addGraines(campCourant[pointeur]);
 				campCourant[pointeur] = 0;
-				
+
 				if((pointeur-1)<=0){
 					if(campCourant == this.campBlanc){
 						campCourant = this.campNoir;
@@ -123,14 +141,14 @@ public class PlateauAwale implements PlateauJeu{
 				}
 				pointeur--;
 			}
-			
-			
+
+
 		}else{
 			nbGraines = this.campNoir[trou];
 			this.campNoir[trou] = 0;
 			campCourant = this.campNoir;
 			while(nbGraines > 0){
-				
+
 				if((pointeur+1)>=6){
 					if(campCourant == this.campBlanc){
 						campCourant = this.campNoir;
@@ -139,19 +157,19 @@ public class PlateauAwale implements PlateauJeu{
 					}
 					pointeur = -1;
 				}
-					
+
 				pointeur++;
 				if(pointeur == trou && campCourant == campNoir){
 					continue;
 				}
 				nbGraines--;
-				campCourant[pointeur]++;				
+				campCourant[pointeur]++;
 			}
-			
+
 			while((campCourant[pointeur] == 2 || campCourant[pointeur] == 3) && campCourant == this.campBlanc){
 				j.addGraines(campCourant[pointeur]);
 				campCourant[pointeur] = 0;
-				
+
 				if((pointeur-1)<=0){
 					if(campCourant == this.campBlanc){
 						campCourant = this.campNoir;
@@ -164,15 +182,15 @@ public class PlateauAwale implements PlateauJeu{
 			}
 
 		}
-		
+
 	}
-	
+
 	public String toString() {
 		String retstr = new String("");
-		
+
 		retstr += "-------------------------------\n";
 		retstr += "| ";
-		for(int i=0; i<6; i++){
+		for(int i=5; i>=0; i--){
 			retstr += String.format("%02d", this.campNoir[i])+" | ";
 		}
 		retstr += "\n| ";
@@ -180,12 +198,12 @@ public class PlateauAwale implements PlateauJeu{
 			retstr += String.format("%02d", this.campBlanc[i])+" | ";
 		}
 		retstr += "\n-------------------------------";
-		
+
 		return retstr;
 	}
 
 	public void printPlateau(PrintStream out) {
-		out.println(this.toString());		
+		out.println(this.toString());
 	}
 
 	@Override
@@ -195,7 +213,7 @@ public class PlateauAwale implements PlateauJeu{
 		}
 		return false;
 	}
-	
+
 	private boolean PlateauBlancVide(){
 		int res = 0;
 		for(int c: this.campBlanc){
@@ -203,7 +221,7 @@ public class PlateauAwale implements PlateauJeu{
 		}
 		return res==0;
 	}
-	
+
 	private boolean PlateauNoirVide(){
 		int res = 0;
 		for(int c: this.campNoir){
