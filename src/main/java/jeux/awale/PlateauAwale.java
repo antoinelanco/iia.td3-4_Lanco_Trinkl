@@ -39,12 +39,12 @@ public class PlateauAwale implements PlateauJeu{
 
 	}
 
-	public PlateauAwale(int[] campBlanc, int[] campNoir){
-		this.ramasse = true;
+	public PlateauAwale(int[] campBlanc, int[] campNoir, boolean ramasse, int nbGrainesBlanc, int nbGrainesNoir){
+		this.ramasse = ramasse;
 		this.campBlanc = new int[TAILLE];
 		this.campNoir = new int[TAILLE];
-		this.nbGrainesBlanc = 0;
-		this.nbGrainesNoir = 0;
+		this.nbGrainesBlanc = nbGrainesBlanc;
+		this.nbGrainesNoir = nbGrainesNoir;
 		for(int i=0; i < TAILLE; i++){
 			this.campBlanc[i] = campBlanc[i];
 		}
@@ -282,7 +282,7 @@ public class PlateauAwale implements PlateauJeu{
 
 	@Override
 	public PlateauJeu copy() {
-		return new PlateauAwale(this.campBlanc,this.campNoir);
+		return new PlateauAwale(this.campBlanc,this.campNoir,this.ramasse,this.nbGrainesBlanc,this.nbGrainesNoir);
 	}
 
 	@Override
