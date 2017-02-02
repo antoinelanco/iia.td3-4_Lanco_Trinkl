@@ -42,7 +42,7 @@ public class AlphaBeta implements AlgoJeu {
 			PlateauJeu tmp = p.copy();
 			tmp.joue(this.joueurMax, c);
 			int Max = minMax(tmp, profMax - 1,alpha,beta);
-			System.out.println("mh : "+Max);
+			//System.out.println("mh : "+Max);
 			if (alpha < Max){
 				alpha = Max;
 				MH = alpha;
@@ -54,7 +54,7 @@ public class AlphaBeta implements AlgoJeu {
 
         System.out.println("N°Noeuds :"+this.nbnoeuds);
         System.out.println("N°Feuilles :"+this.nbfeuilles);
-        System.out.println("mc :"+MH);
+        //System.out.println("mc :"+MH);
         return meilleurCoup;
      }
 

@@ -53,7 +53,7 @@ public class PartieAwaleWithMe {
 		Scanner input = new Scanner( System.in );
         while (!jeufini) {
         	if(((PlateauAwale) plateauCourant).affame(lesJoueurs[jnum])){
-        		System.out.println("Le joueur " + ((PlateauAwale) plateauCourant).QuiAGG() + " a gagné cette partie !");
+        		System.out.println(((PlateauAwale) plateauCourant).QuiAGG());
         		jeufini = true;
         		continue;
         	}
@@ -94,7 +94,7 @@ public class PartieAwaleWithMe {
 	            jnum = 1 - jnum;
 
             } else {
-            	System.out.println("Le joueur " + ((PlateauAwale) plateauCourant).QuiAGG() + " a gagné cette partie !");
+            	System.out.println(((PlateauAwale) plateauCourant).QuiAGG());
                 jeufini = true;
 
             }

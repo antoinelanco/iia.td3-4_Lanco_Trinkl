@@ -20,14 +20,12 @@ public class PartieAwale {
         lesJoueurs[0] = jBlanc;
         lesJoueurs[1] = jNoir;
 
-
-
         AlgoJeu AlgoJoueur[] = new AlgoJeu[2];
-        AlgoJoueur[0] = new Minimax(HeuristiquesAwale.hblanc, jBlanc, jNoir,2); // Il faut remplir la méthode !!!
+        AlgoJoueur[0] = new Minimax(HeuristiquesAwale.hblanc, jBlanc, jNoir,5); // Il faut remplir la méthode !!!
         //AlgoJoueur[1] = new Minimax(HeuristiquesAwale.hnoir, jNoir, jBlanc,4);  // Il faut remplir la méthode !!!
         
         //AlgoJoueur[0] = new AlphaBeta(HeuristiquesAwale.hblanc, jBlanc, jNoir,4);
-        AlgoJoueur[1] = new AlphaBeta(HeuristiquesAwale.hnoir, jNoir, jBlanc,2);	
+        AlgoJoueur[1] = new AlphaBeta(HeuristiquesAwale.hnoir, jNoir, jBlanc,15);	
         
         System.out.println("TD IIA n.3 - Algorithmes pour les Jeux");
         System.out.println("Etat Initial du plateau de jeu:");
@@ -54,7 +52,7 @@ public class PartieAwale {
             // Vérifie qu'il y a bien des coups possibles
             // Ce n'est pas tres efficace, mais c'est plus rapide... a écrire...
             if(((PlateauAwale) plateauCourant).affame(lesJoueurs[jnum])){;
-        		System.out.println("Le joueur " + ((PlateauAwale) plateauCourant).QuiAGG() + " a gagné cette partie !");
+        		System.out.println(((PlateauAwale) plateauCourant).QuiAGG());
         		jeufini = true;
         		continue;
         	}
@@ -73,7 +71,7 @@ public class PartieAwale {
                 jnum = 1 - jnum;
 
             } else {
-                System.out.println("Le joueur " + ((PlateauAwale) plateauCourant).QuiAGG() + " a gagné cette partie !");
+                System.out.println(((PlateauAwale) plateauCourant).QuiAGG());
                 jeufini = true;
 
             }
