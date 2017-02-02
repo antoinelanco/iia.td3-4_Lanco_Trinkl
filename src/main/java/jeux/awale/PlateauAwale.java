@@ -21,9 +21,11 @@ public class PlateauAwale implements PlateauJeu{
 	private int campNoir[];
 	private int nbGrainesBlanc;
 	private int nbGrainesNoir;
+	private boolean ramasse;
 
 
 	public PlateauAwale(){
+		this.ramasse = true;
 		this.campBlanc = new int[TAILLE];
 		this.campNoir = new int[TAILLE];
 		this.nbGrainesBlanc = 0;
@@ -38,6 +40,7 @@ public class PlateauAwale implements PlateauJeu{
 	}
 
 	public PlateauAwale(int[] campBlanc, int[] campNoir){
+		this.ramasse = true;
 		this.campBlanc = new int[TAILLE];
 		this.campNoir = new int[TAILLE];
 		this.nbGrainesBlanc = 0;
@@ -79,10 +82,14 @@ public class PlateauAwale implements PlateauJeu{
 			for(CoupJeu c : tmpArray){
 				PlateauAwale tmp = (PlateauAwale) this.copy();
 				tmp.joue(j, c);
-				if(getGrainesPlateauNoir()==0){
+				if(tmp.getGrainesPlateauNoir()==0){
 					lesCoupsPossibles.remove(c);
 				}
 				
+			}
+			if(lesCoupsPossibles.size()==0){
+				lesCoupsPossibles = (ArrayList<CoupJeu>) tmpArray.clone();
+				this.ramasse = false;
 			}
 		}else{
 			for(int i=0; i< TAILLE; i++){
@@ -95,10 +102,14 @@ public class PlateauAwale implements PlateauJeu{
 			for(CoupJeu c : tmpArray){
 				PlateauAwale tmp = (PlateauAwale) this.copy();
 				tmp.joue(j, c);
-				if(getGrainesPlateauBlanc()==0){
+				if(tmp.getGrainesPlateauBlanc()==0){
 					lesCoupsPossibles.remove(c);
 				}
 				
+			}
+			if(lesCoupsPossibles.size()==0){
+				lesCoupsPossibles = (ArrayList<CoupJeu>) tmpArray.clone();
+				this.ramasse = false;
 			}
 		}
 		return lesCoupsPossibles;
@@ -138,7 +149,7 @@ public class PlateauAwale implements PlateauJeu{
 				campCourant[pointeur]++;
 			}
 
-			while((campCourant[pointeur] == 2 || campCourant[pointeur] == 3) && campCourant == this.campNoir){
+			while((campCourant[pointeur] == 2 || campCourant[pointeur] == 3) && campCourant == this.campNoir && this.ramasse){
 				this.nbGrainesBlanc+=campCourant[pointeur];
 				campCourant[pointeur] = 0;
 
@@ -177,7 +188,7 @@ public class PlateauAwale implements PlateauJeu{
 				campCourant[pointeur]++;
 			}
 
-			while((campCourant[pointeur] == 2 || campCourant[pointeur] == 3) && campCourant == this.campBlanc){
+			while((campCourant[pointeur] == 2 || campCourant[pointeur] == 3) && campCourant == this.campBlanc && this.ramasse){
 				this.nbGrainesNoir+=campCourant[pointeur];
 				campCourant[pointeur] = 0;
 
@@ -193,7 +204,8 @@ public class PlateauAwale implements PlateauJeu{
 			}
 
 		}
-
+		
+		this.ramasse=true;
 	}
 
 	public String toString() {
@@ -225,7 +237,7 @@ public class PlateauAwale implements PlateauJeu{
 
 	@Override
 	public boolean finDePartie() {
-		if(this.nbGrainesBlanc > 25 || this.nbGrainesNoir > 25 || getGrainesPlateauBlanc()==0 || getGrainesPlateauNoir()==0 || getGrainesPlateauBlanc()+getGrainesPlateauNoir() <= 6 ){
+		if(this.nbGrainesBlanc >= 25 || this.nbGrainesNoir >= 25 || getGrainesPlateauBlanc()+getGrainesPlateauNoir() <= 6 ){
 			return true;
 		}
 		return false;
