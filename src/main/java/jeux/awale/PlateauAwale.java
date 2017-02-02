@@ -70,6 +70,7 @@ public class PlateauAwale implements PlateauJeu{
 
 	@Override
 	public ArrayList<CoupJeu> coupsPossibles(Joueur j) {
+		this.ramasse = true;
 		ArrayList<CoupJeu> lesCoupsPossibles = new ArrayList<CoupJeu>();
 		if(isJoueurBlanc(j)){
 			for(int i=0 ; i < TAILLE ; i++) {
@@ -89,7 +90,10 @@ public class PlateauAwale implements PlateauJeu{
 			}
 			if(lesCoupsPossibles.size()==0){
 				lesCoupsPossibles = (ArrayList<CoupJeu>) tmpArray.clone();
+				System.out.println("--------------------------ramasse false-------------------------");
 				this.ramasse = false;
+			}else{
+				this.ramasse = true;
 			}
 		}else{
 			for(int i=0; i< TAILLE; i++){
@@ -109,7 +113,10 @@ public class PlateauAwale implements PlateauJeu{
 			}
 			if(lesCoupsPossibles.size()==0){
 				lesCoupsPossibles = (ArrayList<CoupJeu>) tmpArray.clone();
+				System.out.println("--------------------------ramasse false-------------------------");
 				this.ramasse = false;
+			}else{
+				this.ramasse = true;
 			}
 		}
 		return lesCoupsPossibles;
@@ -164,7 +171,6 @@ public class PlateauAwale implements PlateauJeu{
 				pointeur--;
 			}
 
-
 		}else{
 			nbGraines = this.campNoir[trou];
 			this.campNoir[trou] = 0;
@@ -205,7 +211,6 @@ public class PlateauAwale implements PlateauJeu{
 
 		}
 		
-		this.ramasse=true;
 	}
 
 	public String toString() {
