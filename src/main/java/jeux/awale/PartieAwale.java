@@ -23,11 +23,11 @@ public class PartieAwale {
 
 
         AlgoJeu AlgoJoueur[] = new AlgoJeu[2];
-        //AlgoJoueur[0] = new Minimax(HeuristiquesAwale.hblanc, jBlanc, jNoir,4); // Il faut remplir la méthode !!!
+        AlgoJoueur[0] = new Minimax(HeuristiquesAwale.hblanc, jBlanc, jNoir,2); // Il faut remplir la méthode !!!
         //AlgoJoueur[1] = new Minimax(HeuristiquesAwale.hnoir, jNoir, jBlanc,4);  // Il faut remplir la méthode !!!
         
-        AlgoJoueur[0] = new AlphaBeta(HeuristiquesAwale.hblanc, jBlanc, jNoir,10);
-        AlgoJoueur[1] = new AlphaBeta(HeuristiquesAwale.hnoir, jNoir, jBlanc,10);	
+        //AlgoJoueur[0] = new AlphaBeta(HeuristiquesAwale.hblanc, jBlanc, jNoir,4);
+        AlgoJoueur[1] = new AlphaBeta(HeuristiquesAwale.hnoir, jNoir, jBlanc,2);	
         
         System.out.println("TD IIA n.3 - Algorithmes pour les Jeux");
         System.out.println("Etat Initial du plateau de jeu:");
@@ -46,18 +46,18 @@ public class PartieAwale {
         jnum = 0; // On commence par le joueur Blanc (arbitraire)
 
         while (!jeufini) {
-        	if(((PlateauAwale) plateauCourant).affame(lesJoueurs[jnum])){
-        		System.out.println("Le joueur " + ((PlateauAwale) plateauCourant).QuiAGG() + " a gagné cette partie !");
-        		jeufini = true;
-        		continue;
-        	}
         	System.out.println("NB Graines Blanc : "+((PlateauAwale) plateauCourant).getGrainesBlanc());
         	System.out.println("NB Graines Noir : "+((PlateauAwale) plateauCourant).getGrainesNoir());
-            System.out.println("" + plateauCourant);
+            System.out.println("" + plateauCourant);        	
         	//((PlateauAwale) plateauCourant).toGraph();
             System.out.println("C'est au joueur " + lesJoueurs[jnum] + " de jouer.");
             // Vérifie qu'il y a bien des coups possibles
             // Ce n'est pas tres efficace, mais c'est plus rapide... a écrire...
+            if(((PlateauAwale) plateauCourant).affame(lesJoueurs[jnum])){;
+        		System.out.println("Le joueur " + ((PlateauAwale) plateauCourant).QuiAGG() + " a gagné cette partie !");
+        		jeufini = true;
+        		continue;
+        	}
             ArrayList<CoupJeu> lesCoupsPossibles = plateauCourant.coupsPossibles(lesJoueurs[jnum]);
             System.out.println("Coups possibles pour " + lesJoueurs[jnum] + " : " + lesCoupsPossibles);
             if (!plateauCourant.finDePartie()) {

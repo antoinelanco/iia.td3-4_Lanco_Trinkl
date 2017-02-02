@@ -133,7 +133,10 @@ public class PlateauAwale implements PlateauJeu{
 						return false;
 					}
 				}
+			}else{
+				return false;
 			}
+			
 		}else{
 			if(this.getGrainesPlateauBlanc()==0){
 				for(CoupJeu c : coupsPossibles(j)){
@@ -143,6 +146,8 @@ public class PlateauAwale implements PlateauJeu{
 						return false;
 					}
 				}
+			}else {
+				return false;
 			}
 		}
 		return true;
