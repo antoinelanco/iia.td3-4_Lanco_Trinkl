@@ -90,7 +90,7 @@ public class PlateauAwale implements PlateauJeu{
 			}
 			if(lesCoupsPossibles.size()==0){
 				lesCoupsPossibles = (ArrayList<CoupJeu>) tmpArray.clone();
-				System.out.println("--------------------------ramasse false-------------------------");
+				//System.out.println("--------------------------ramasse false-------------------------");
 				this.ramasse = false;
 			}else{
 				this.ramasse = true;
@@ -113,7 +113,7 @@ public class PlateauAwale implements PlateauJeu{
 			}
 			if(lesCoupsPossibles.size()==0){
 				lesCoupsPossibles = (ArrayList<CoupJeu>) tmpArray.clone();
-				System.out.println("--------------------------ramasse false-------------------------");
+				//System.out.println("--------------------------ramasse false-------------------------");
 				this.ramasse = false;
 			}else{
 				this.ramasse = true;
@@ -122,6 +122,31 @@ public class PlateauAwale implements PlateauJeu{
 		return lesCoupsPossibles;
 	}
 
+	public boolean affame(Joueur j){
+
+		if(isJoueurBlanc(j)){
+			if(this.getGrainesPlateauNoir()==0){
+				for(CoupJeu c : coupsPossibles(j)){
+					PlateauAwale tmp = (PlateauAwale) this.copy();
+					tmp.joue(j,c);
+					if(tmp.getGrainesPlateauNoir()!=0){
+						return false;
+					}
+				}
+			}
+		}else{
+			if(this.getGrainesPlateauBlanc()==0){
+				for(CoupJeu c : coupsPossibles(j)){
+					PlateauAwale tmp = (PlateauAwale) this.copy();
+					tmp.joue(j,c);
+					if(tmp.getGrainesPlateauBlanc()!=0){
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
 	@Override
 	public void joue(Joueur j, CoupJeu c) {
 

@@ -52,6 +52,11 @@ public class PartieAwaleWithMe {
         jnum = 0; // On commence par le joueur Blanc (arbitraire)
 		Scanner input = new Scanner( System.in );
         while (!jeufini) {
+        	if(((PlateauAwale) plateauCourant).affame(lesJoueurs[jnum])){
+        		System.out.println("Le joueur " + ((PlateauAwale) plateauCourant).QuiAGG() + " a gagné cette partie !");
+        		jeufini = true;
+        		continue;
+        	}
         	System.out.println("NB Graines Blanc : "+((PlateauAwale) plateauCourant).getGrainesBlanc());
         	System.out.println("NB Graines Noir : "+((PlateauAwale) plateauCourant).getGrainesNoir());
             System.out.println("" + plateauCourant);
