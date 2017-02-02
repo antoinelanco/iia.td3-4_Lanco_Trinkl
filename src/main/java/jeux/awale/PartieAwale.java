@@ -46,6 +46,8 @@ public class PartieAwale {
         jnum = 0; // On commence par le joueur Blanc (arbitraire)
 
         while (!jeufini) {
+        	System.out.println("NB Graines Blanc : "+((PlateauAwale) plateauCourant).getGrainesBlanc());
+        	System.out.println("NB Graines Noir : "+((PlateauAwale) plateauCourant).getGrainesNoir());
             System.out.println("" + plateauCourant);
         	//((PlateauAwale) plateauCourant).toGraph();
             System.out.println("C'est au joueur " + lesJoueurs[jnum] + " de jouer.");
@@ -53,7 +55,7 @@ public class PartieAwale {
             // Ce n'est pas tres efficace, mais c'est plus rapide... a écrire...
             ArrayList<CoupJeu> lesCoupsPossibles = plateauCourant.coupsPossibles(lesJoueurs[jnum]);
             System.out.println("Coups possibles pour " + lesJoueurs[jnum] + " : " + lesCoupsPossibles);
-            if (lesCoupsPossibles.size() > 0) {
+            if (!plateauCourant.finDePartie()) {
                 // On écrit le plateau
 
                 // Lancement de l'algo de recherche du meilleur coup
@@ -66,8 +68,7 @@ public class PartieAwale {
                 jnum = 1 - jnum;
 
             } else {
-                System.out.println("Le joueur " + lesJoueurs[jnum] + " ne peut plus jouer et abandone !");
-                System.out.println("Le joueur " + lesJoueurs[1 - jnum] + " a gagné cette partie !");
+                System.out.println("Le joueur " + ((PlateauAwale) plateauCourant).QuiAGG() + " a gagné cette partie !");
                 jeufini = true;
 
             }

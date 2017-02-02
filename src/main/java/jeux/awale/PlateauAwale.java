@@ -225,10 +225,18 @@ public class PlateauAwale implements PlateauJeu{
 
 	@Override
 	public boolean finDePartie() {
-		if(this.nbGrainesBlanc > 25 || this.nbGrainesNoir > 25 || getGrainesPlateauBlanc()==0 || getGrainesPlateauNoir()==0 ){
+		if(this.nbGrainesBlanc > 25 || this.nbGrainesNoir > 25 || getGrainesPlateauBlanc()==0 || getGrainesPlateauNoir()==0 || getGrainesPlateauBlanc()+getGrainesPlateauNoir() <= 6 ){
 			return true;
 		}
 		return false;
+	}
+	
+	public Joueur QuiAGG(){
+		if(this.nbGrainesBlanc > this.nbGrainesNoir){
+			return this.joueurBlanc;
+		}else{
+			return this.joueurNoir;
+		}
 	}
 
 	public int getGrainesPlateauBlanc(){

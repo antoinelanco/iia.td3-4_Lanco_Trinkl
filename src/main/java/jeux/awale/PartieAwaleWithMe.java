@@ -60,7 +60,7 @@ public class PartieAwaleWithMe {
             // Ce n'est pas tres efficace, mais c'est plus rapide... a écrire...
             ArrayList<CoupJeu> lesCoupsPossibles = plateauCourant.coupsPossibles(lesJoueurs[jnum]);
             System.out.println("Coups possibles pour " + lesJoueurs[jnum] + " : " + lesCoupsPossibles);
-            if (lesCoupsPossibles.size() > 0) {
+            if (!plateauCourant.finDePartie()) {
                 // On écrit le plateau
 
             	if(jnum == 0){
@@ -89,8 +89,7 @@ public class PartieAwaleWithMe {
 	            jnum = 1 - jnum;
 
             } else {
-                System.out.println("Le joueur " + lesJoueurs[jnum] + " ne peut plus jouer et abandone !");
-                System.out.println("Le joueur " + lesJoueurs[1 - jnum] + " a gagné cette partie !");
+            	System.out.println("Le joueur " + ((PlateauAwale) plateauCourant).QuiAGG() + " a gagné cette partie !");
                 jeufini = true;
 
             }
